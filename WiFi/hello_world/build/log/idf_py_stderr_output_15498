@@ -1,0 +1,696 @@
+[0;33m--- esp-idf-monitor 1.5.0 on /dev/ttyUSB0 115200[0m
+[0;33m--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4008ebb2: insert_free_block at /home/radek/esp-idf/components/heap/tlsf/tlsf_control_functions.h:404
+ (inlined by) block_insert at /home/radek/esp-idf/components/heap/tlsf/tlsf_control_functions.h:430
+ (inlined by) tlsf_free at /home/radek/esp-idf/components/heap/tlsf/tlsf.c:633
+[0m
+[0;33m--- 0x4000c46c: memset in ROM
+0x4000c477: memset in ROM
+[0m
+[0;33m--- 0x4008ebaf: insert_free_block at /home/radek/esp-idf/components/heap/tlsf/tlsf_control_functions.h:403
+ (inlined by) block_insert at /home/radek/esp-idf/components/heap/tlsf/tlsf_control_functions.h:430
+ (inlined by) tlsf_free at /home/radek/esp-idf/components/heap/tlsf/tlsf.c:633
+0x4008e6b8: multi_heap_free_impl at /home/radek/esp-idf/components/heap/multi_heap.c:233
+0x40082332: heap_caps_free at /home/radek/esp-idf/components/heap/heap_caps_base.c:70
+0x40091451: free at /home/radek/esp-idf/components/newlib/heap.c:39
+0x4011f2c4: mem_free at /home/radek/esp-idf/components/lwip/lwip/src/core/mem.c:236
+0x4011f343: do_memp_free_pool at /home/radek/esp-idf/components/lwip/lwip/src/core/memp.c:383
+0x4011f37f: memp_free at /home/radek/esp-idf/components/lwip/lwip/src/core/memp.c:440
+0x40125cb5: sys_check_timeouts at /home/radek/esp-idf/components/lwip/lwip/src/core/timeouts.c:401
+0x4011d9c6: tcpip_timeouts_mbox_fetch at /home/radek/esp-idf/components/lwip/lwip/src/api/tcpip.c:109
+0x4011da96: tcpip_thread at /home/radek/esp-idf/components/lwip/lwip/src/api/tcpip.c:142
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+[0m
+[0;33m--- 0x4010676b: scan_inter_channel_timeout_process at ??:?
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4010b8a6: chm_end_op_timeout_process at ??:?
+[0m
+[0;33m--- 0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+[0m
+[0;33m--- 0x4010b673: ieee80211_timer_do_process at ??:?
+[0m
+[0;33m--- 0x40092e19: ppTask at ??:?
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4000c26c: memcmp in ROM
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0;33m--- 0x4010d298: cnx_start_handoff_cb at ??:?
+[0m
+[0;33m--- 0x4000c349: memcpy in ROM
+0x4000c36b: memcpy in ROM
+[0m
+[0;33m--- 0x4000c269: memcmp in ROM
+0x4013e4d1: pmksa_cache_get at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/pmksa_cache.c:320 (discriminator 2)
+0x4013c449: wpa_set_bss at /home/radek/esp-idf/components/wpa_supplicant/src/rsn_supp/wpa.c:2355
+0x40131a99: wpa_config_bss at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:117
+0x40131ab1: wpa_sta_connect at /home/radek/esp-idf/components/wpa_supplicant/esp_supplicant/src/esp_wpa_main.c:237
+0x4010d24a: cnx_remove_all_rc at ??:?
+0x4010d2ac: cnx_start_handoff_cb at ??:?
+0x401062d0: clear_bss_queue at ??:?
+0x4010676b: scan_inter_channel_timeout_process at ??:?
+0x4010b887: chm_end_op at ??:?
+0x4010b8a6: chm_end_op_timeout_process at ??:?
+0x4010b3f4: ieee80211_ap_sa_query_timeout at ??:?
+0x4010b673: ieee80211_timer_do_process at ??:?
+0x40092e19: ppTask at ??:?
+0x4008a17d: vPortTaskWrapper at /home/radek/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+[0m
+[0;33m--- 0x40080400: _init at ??:?
+[0m
+[0m

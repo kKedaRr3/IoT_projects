@@ -1,0 +1,260 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6276
+load:0x40078000,len:15728
+ho 0 tail 12 room 4
+load:0x40080400,len:4
+load:0x40080404,len:3860
+entry 0x4008063c
+[0;32mI (31) boot: ESP-IDF v5.4-dev-3602-ga97a7b0962 2nd stage bootloader[0m
+[0;32mI (31) boot: compile time Oct 26 2024 15:34:04[0m
+[0;32mI (31) boot: Multicore bootloader[0m
+[0;32mI (34) boot: chip revision: v3.0[0m
+[0;32mI (37) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (41) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (44) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (48) boot: Enabling RNG early entropy source...[0m
+[0;32mI (52) boot: Partition Table:[0m
+[0;32mI (55) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (61) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (68) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (74) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (81) boot: End of partition table[0m
+[0;32mI (84) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1f71ch (128796) map[0m
+[0;32mI (136) esp_image: segment 1: paddr=0002f744 vaddr=3ff80000 size=00018h (    24) load[0m
+[0;32mI (136) esp_image: segment 2: paddr=0002f764 vaddr=3ffb0000 size=008b4h (  2228) load[0m
+[0;32mI (140) esp_image: segment 3: paddr=00030020 vaddr=400d0020 size=836fch (538364) map[0m
+[0;32mI (331) esp_image: segment 4: paddr=000b3724 vaddr=3ffb08b4 size=03684h ( 13956) load[0m
+[0;32mI (336) esp_image: segment 5: paddr=000b6db0 vaddr=40080000 size=176b0h ( 95920) load[0m
+[0;32mI (385) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (385) boot: Disabling RNG early entropy source...[0m
+[0;32mI (396) cpu_start: Multicore app[0m
+[0;32mI (404) cpu_start: Pro cpu start user code[0m
+[0;32mI (404) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (404) app_init: Application information:[0m
+[0;32mI (404) app_init: Project name:     hello_world[0m
+[0;32mI (408) app_init: App version:      dd85ad9[0m
+[0;32mI (412) app_init: Compile time:     Oct 26 2024 15:33:59[0m
+[0;32mI (417) app_init: ELF file SHA256:  b6adfd357...[0m
+[0;32mI (422) app_init: ESP-IDF:          v5.4-dev-3602-ga97a7b0962[0m
+[0;32mI (427) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (431) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (435) efuse_init: Chip rev:         v3.0[0m
+[0;32mI (439) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (445) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (450) heap_init: At 3FFB81B0 len 00027E50 (159 KiB): DRAM[0m
+[0;32mI (455) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (461) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (466) heap_init: At 400976B0 len 00008950 (34 KiB): IRAM[0m
+[0;32mI (473) spi_flash: detected chip: generic[0m
+[0;32mI (475) spi_flash: flash io: dio[0m
+[0;33mW (478) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (491) main_task: Started on CPU0[0m
+[0;32mI (501) main_task: Calling app_main()[0m
+[0;32mI (531) wifi:wifi driver task: 3ffc0210, prio:23, stack:6656, core=0[0m
+[0;32mI (541) wifi:wifi firmware version: 0a80d45[0m
+[0;32mI (541) wifi:wifi certification version: v7.0[0m
+[0;32mI (541) wifi:config NVS flash: enabled[0m
+[0;32mI (541) wifi:config nano formatting: disabled[0m
+[0;32mI (541) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (551) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (551) wifi:Init management short buffer num: 32[0m
+[0;32mI (561) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (561) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (571) wifi:Init static rx buffer num: 10[0m
+[0;32mI (571) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (571) wifi_init: rx ba win: 6[0m
+[0;32mI (581) wifi_init: accept mbox: 6[0m
+[0;32mI (581) wifi_init: tcpip mbox: 32[0m
+[0;32mI (581) wifi_init: udp mbox: 6[0m
+[0;32mI (581) wifi_init: tcp mbox: 6[0m
+[0;32mI (591) wifi_init: tcp tx win: 5760[0m
+[0;32mI (591) wifi_init: tcp rx win: 5760[0m
+[0;32mI (591) wifi_init: tcp mss: 1440[0m
+[0;32mI (601) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (601) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (611) phy_init: phy_version 4840,02e0d70,Sep  2 2024,19:39:07[0m
+[0;32mI (681) wifi:mode : sta (c0:49:ef:cc:0a:74)[0m
+[0;32mI (681) wifi:enable tsf[0m
+[0;32mI (691) WiFi_STA: WiFi w trybie stacji zainicjalizowane.[0m
+[0;32mI (691) main_task: Returned from app_main()[0m
+[0;32mI (3101) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (5511) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (7931) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (10341) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (12761) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (15171) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (17581) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (20001) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (22411) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (24821) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (27241) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (27371) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (27371) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (27381) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (27401) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (27431) wifi:connected with Galaxy_A52s_5G, aid = 1, channel 1, BW20, bssid = 2e:5b:39:13:db:cc[0m
+[0;32mI (27431) wifi:security: WPA2-PSK, phy: bgn, rssi: -36[0m
+[0;32mI (27451) wifi:pm start, type: 1[0m
+
+[0;32mI (27461) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (27481) wifi:<ba-add>idx:0 (ifx:0, 2e:5b:39:13:db:cc), tid:0, ssn:0, winSize:64[0m
+[0;32mI (27491) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us[0m
+[0;32mI (27491) wifi:AP's beacon interval = 102400 us, DTIM period = 2[0m
+[0;32mI (27581) wifi:<ba-add>idx:1 (ifx:0, 2e:5b:39:13:db:cc), tid:6, ssn:2, winSize:64[0m
+[0;32mI (28521) esp_netif_handlers: sta ip: 192.168.179.66, mask: 255.255.255.0, gw: 192.168.179.249[0m
+[0;32mI (28521) WiFi_STA: Uzyskano IP: 192.168.179.66[0m
+[1;31mE (34581) task_wdt: Task watchdog got triggered. The following tasks/users did not reset the watchdog in time:[0m
+[1;31mE (34581) task_wdt:  - IDLE1 (CPU 1)[0m
+[1;31mE (34581) task_wdt: Tasks currently running:[0m
+[1;31mE (34581) task_wdt: CPU 0: IDLE0[0m
+[1;31mE (34581) task_wdt: CPU 1: blink_led_task[0m
+[1;31mE (34581) task_wdt: Print CPU 1 backtrace[0m
+
+
+Backtrace: 0x4008506A:0x3FFB2590 0x400833E5:0x3FFB25B0 0x400D788C:0x3FFC6F60 0x400D7231:0x3FFC6FA0 0x4008A17D:0x3FFC6FC0
+
+[1;31mE (39581) task_wdt: Task watchdog got triggered. The following tasks/users did not reset the watchdog in time:[0m
+[1;31mE (39581) task_wdt:  - IDLE1 (CPU 1)[0m
+[1;31mE (39581) task_wdt: Tasks currently running:[0m
+[1;31mE (39581) task_wdt: CPU 0: IDLE0[0m
+[1;31mE (39581) task_wdt: CPU 1: blink_led_task[0m
+[1;31mE (39581) task_wdt: Print CPU 1 backtrace[0m
+
+
+Backtrace: 0x4008506A:0x3FFB2590 0x400833E5:0x3FFB25B0 0x400D7228:0x3FFC6FA0 0x4008A17D:0x3FFC6FC0
+
+[1;31mE (44581) task_wdt: Task watchdog got triggered. The following tasks/users did not reset the watchdog in time:[0m
+[1;31mE (44581) task_wdt:  - IDLE1 (CPU 1)[0m
+[1;31mE (44581) task_wdt: Tasks currently running:[0m
+[1;31mE (44581) task_wdt: CPU 0: IDLE0[0m
+[1;31mE (44581) task_wdt: CPU 1: blink_led_task[0m
+[1;31mE (44581) task_wdt: Print CPU 1 backtrace[0m
+
+
+Backtrace: 0x4008506A:0x3FFB2590 0x400833E5:0x3FFB25B0 0x400D7228:0x3FFC6FA0 0x4008A17D:0x3FFC6FC0
+
+[1;31mE (49581) task_wdt: Task watchdog got triggered. The following tasks/users did not reset the watchdog in time:[0m
+[1;31mE (49581) task_wdt:  - IDLE1 (CPU 1)[0m
+[1;31mE (49581) task_wdt: Tasks currently running:[0m
+[1;31mE (49581) task_wdt: CPU 0: IDLE0[0m
+[1;31mE (49581) task_wdt: CPU 1: blink_led_task[0m
+[1;31mE (49581) task_wdt: Print CPU 1 backtrace[0m
+
+
+Backtrace: 0x4008506A:0x3FFB2590 0x400833E5:0x3FFB25B0 0x400D7226:0x3FFC6FA0 0x4008A17D:0x3FFC6FC0
+
+[1;31mE (57371) task_wdt: Task watchdog got triggered. The following tasks/users did not reset the watchdog in time:[0m
+[1;31mE (57371) task_wdt:  - IDLE1 (CPU 1)[0m
+[1;31mE (57371) task_wdt: Tasks currently running:[0m
+[1;31mE (57371) task_wdt: CPU 0: IDLE0[0m
+[1;31mE (57371) task_wdt: CPU 1: blink_led_task[0m
+[1;31mE (57371) task_wdt: Print CPU 1 backtrace[0m
+
+
+Backtrace: 0x4008506A:0x3FFB2590 0x400833E5:0x3FFB25B0 0x400D7228:0x3FFC6FA0 0x4008A17D:0x3FFC6FC0
+
+[1;31mE (62371) task_wdt: Task watchdog got triggered. The following tasks/users did not reset the watchdog in time:[0m
+[1;31mE (62371) task_wdt:  - IDLE1 (CPU 1)[0m
+[1;31mE (62371) task_wdt: Tasks currently running:[0m
+[1;31mE (62371) task_wdt: CPU 0: IDLE0[0m
+[1;31mE (62371) task_wdt: CPU 1: blink_led_task[0m
+[1;31mE (62371) task_wdt: Print CPU 1 backtrace[0m
+
+
+Backtrace: 0x4008506A:0x3FFB2590 0x400833E5:0x3FFB25B0 0x400D7846:0x3FFC6F60 0x400D7231:0x3FFC6FA0 0x4008A17D:0x3FFC6FC0
+
+[1;31mE (67371) task_wdt: Task watchdog got triggered. The following tasks/users did not reset the watchdog in time:[0m
+[1;31mE (67371) task_wdt:  - IDLE1 (CPU 1)[0m
+[1;31mE (67371) task_wdt: Tasks currently running:[0m
+[1;31mE (67371) task_wdt: CPU 0: IDLE0[0m
+[1;31mE (67371) task_wdt: CPU 1: blink_led_task[0m
+[1;31mE (67371) task_wdt: Print CPU 1 backtrace[0m
+
+
+Backtrace: 0x4008506A:0x3FFB2590 0x400833E5:0x3FFB25B0 0x400D788C:0x3FFC6F60 0x400D7231:0x3FFC6FA0 0x4008A17D:0x3FFC6FC0
+
+[0;32mI (79001) wifi:state: run -> init (0x1a0)[0m
+[0;32mI (79011) wifi:pm stop, total sleep time: 49162003 us / 51550858 us[0m
+
+[0;32mI (79011) wifi:<ba-del>idx:0, tid:0[0m
+[0;32mI (79011) wifi:<ba-del>idx:1, tid:6[0m
+[0;32mI (79011) wifi:new:<1,0>, old:<1,0>, ap:<255,255>, sta:<1,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (79021) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (81441) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (83851) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (86261) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (88671) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (91091) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (93501) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (95911) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (98331) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (100741) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (103151) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (105561) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (107981) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (110391) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (112801) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (115221) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (117631) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (120041) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (122461) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (124871) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (127281) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (129691) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (132111) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (134521) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (136931) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (139351) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (141761) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (144171) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (146591) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (149001) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (151411) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (153831) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (156241) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (158651) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (161061) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (163481) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (165891) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (168301) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (170721) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (173131) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (175541) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (177951) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (180371) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (182781) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (185191) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (187611) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (190021) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (192431) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (194851) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (195861) wifi:new:<9,0>, old:<1,0>, ap:<255,255>, sta:<9,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (195861) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (195871) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (195891) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (195921) wifi:connected with Galaxy_A52s_5G, aid = 1, channel 9, BW20, bssid = 2e:5b:39:13:db:cc[0m
+[0;32mI (195921) wifi:security: WPA2-PSK, phy: bgn, rssi: -50[0m
+[0;32mI (195941) wifi:pm start, type: 1[0m
+
+[0;32mI (195941) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (195951) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us[0m
+[0;32mI (195961) wifi:AP's beacon interval = 102400 us, DTIM period = 2[0m
+[0;32mI (196471) wifi:<ba-add>idx:0 (ifx:0, 2e:5b:39:13:db:cc), tid:0, ssn:0, winSize:64[0m
+[0;32mI (197501) esp_netif_handlers: sta ip: 192.168.179.66, mask: 255.255.255.0, gw: 192.168.179.249[0m
+[0;32mI (197501) WiFi_STA: Uzyskano IP: 192.168.179.66[0m
+[1;31mE (203681) task_wdt: Task watchdog got triggered. The following tasks/users did not reset the watchdog in time:[0m
+[1;31mE (203681) task_wdt:  - IDLE1 (CPU 1)[0m
+[1;31mE (203681) task_wdt: Tasks currently running:[0m
+[1;31mE (203681) task_wdt: CPU 0: IDLE0[0m
+[1;31mE (203681) task_wdt: CPU 1: blink_led_task[0m
+[1;31mE (203681) task_wdt: Print CPU 1 backtrace[0m
+
+
+Backtrace: 0x4008506A:0x3FFB2590 0x400833E5:0x3FFB25B0 0x400D7846:0x3FFC6F60 0x400D7231:0x3FFC6FA0 0x4008A17D:0x3FFC6FC0
+
+[1;31mE (208681) task_wdt: Task watchdog got triggered. The following tasks/users d

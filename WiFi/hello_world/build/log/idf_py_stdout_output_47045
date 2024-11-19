@@ -1,0 +1,534 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6276
+load:0x40078000,len:15728
+ho 0 tail 12 room 4
+load:0x40080400,len:4
+load:0x40080404,len:3860
+entry 0x4008063c
+[0;32mI (31) boot: ESP-IDF v5.4-dev-3602-ga97a7b0962 2nd stage bootloader[0m
+[0;32mI (31) boot: compile time Oct 26 2024 15:34:04[0m
+[0;32mI (31) boot: Multicore bootloader[0m
+[0;32mI (34) boot: chip revision: v3.0[0m
+[0;32mI (37) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (41) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (44) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (48) boot: Enabling RNG early entropy source...[0m
+[0;32mI (52) boot: Partition Table:[0m
+[0;32mI (55) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (61) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (68) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (74) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (81) boot: End of partition table[0m
+[0;32mI (84) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=24344h (148292) map[0m
+[0;32mI (142) esp_image: segment 1: paddr=0003436c vaddr=3ff80000 size=00018h (    24) load[0m
+[0;32mI (143) esp_image: segment 2: paddr=0003438c vaddr=3ffb0000 size=03f58h ( 16216) load[0m
+[0;32mI (152) esp_image: segment 3: paddr=000382ec vaddr=40080000 size=07d2ch ( 32044) load[0m
+[0;32mI (166) esp_image: segment 4: paddr=00040020 vaddr=400d0020 size=9cf98h (642968) map[0m
+[0;32mI (386) esp_image: segment 5: paddr=000dcfc0 vaddr=40087d2c size=0f984h ( 63876) load[0m
+[0;32mI (422) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (422) boot: Disabling RNG early entropy source...[0m
+[0;32mI (433) cpu_start: Multicore app[0m
+[0;32mI (441) cpu_start: Pro cpu start user code[0m
+[0;32mI (441) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (441) app_init: Application information:[0m
+[0;32mI (441) app_init: Project name:     hello_world[0m
+[0;32mI (446) app_init: App version:      dd85ad9[0m
+[0;32mI (449) app_init: Compile time:     Oct 26 2024 15:33:59[0m
+[0;32mI (455) app_init: ELF file SHA256:  81c0a2bfe...[0m
+[0;32mI (459) app_init: ESP-IDF:          v5.4-dev-3602-ga97a7b0962[0m
+[0;32mI (464) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (468) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (472) efuse_init: Chip rev:         v3.0[0m
+[0;32mI (476) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (482) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (487) heap_init: At 3FFB87A8 len 00027858 (158 KiB): DRAM[0m
+[0;32mI (493) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (498) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (504) heap_init: At 400976B0 len 00008950 (34 KiB): IRAM[0m
+[0;32mI (510) spi_flash: detected chip: generic[0m
+[0;32mI (512) spi_flash: flash io: dio[0m
+[0;33mW (515) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (529) main_task: Started on CPU0[0m
+[0;32mI (539) main_task: Calling app_main()[0m
+[0;32mI (569) wifi:wifi driver task: 3ffc09a8, prio:23, stack:6656, core=0[0m
+[0;32mI (579) wifi:wifi firmware version: 0a80d45[0m
+[0;32mI (579) wifi:wifi certification version: v7.0[0m
+[0;32mI (579) wifi:config NVS flash: enabled[0m
+[0;32mI (579) wifi:config nano formatting: disabled[0m
+[0;32mI (579) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (589) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (589) wifi:Init management short buffer num: 32[0m
+[0;32mI (599) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (599) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (609) wifi:Init static rx buffer num: 10[0m
+[0;32mI (609) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (609) wifi_init: rx ba win: 6[0m
+[0;32mI (619) wifi_init: accept mbox: 6[0m
+[0;32mI (619) wifi_init: tcpip mbox: 32[0m
+[0;32mI (619) wifi_init: udp mbox: 6[0m
+[0;32mI (629) wifi_init: tcp mbox: 6[0m
+[0;32mI (629) wifi_init: tcp tx win: 5760[0m
+[0;32mI (629) wifi_init: tcp rx win: 5760[0m
+[0;32mI (629) wifi_init: tcp mss: 1440[0m
+[0;32mI (639) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (639) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (649) phy_init: phy_version 4840,02e0d70,Sep  2 2024,19:39:07[0m
+[0;32mI (719) wifi:mode : sta (c0:49:ef:cc:0a:74)[0m
+[0;32mI (729) wifi:enable tsf[0m
+[0;32mI (729) WiFi_STA: WiFi w trybie stacji zainicjalizowane.[0m
+[0;32mI (729) main_task: Returned from app_main()[0m
+[0;32mI (739) wifi:new:<11,0>, old:<1,0>, ap:<255,255>, sta:<11,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (749) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (759) wifi:state: auth -> init (0x1c0)[0m
+[0;32mI (769) wifi:new:<11,0>, old:<11,0>, ap:<255,255>, sta:<11,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (769) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (769) WiFi_STA: isConnected: 0 [0m
+[0;32mI (3189) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (3189) WiFi_STA: isConnected: 0 [0m
+[0;32mI (5599) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (5599) WiFi_STA: isConnected: 0 [0m
+[0;32mI (8019) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (8019) WiFi_STA: isConnected: 0 [0m
+[0;32mI (10429) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (10429) WiFi_STA: isConnected: 0 [0m
+[0;32mI (12839) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (12839) WiFi_STA: isConnected: 0 [0m
+[0;32mI (12849) wifi:new:<11,0>, old:<11,0>, ap:<255,255>, sta:<11,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (12849) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (12869) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (12909) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (12969) wifi:connected with Galaxy_A52s_5G, aid = 1, channel 11, BW20, bssid = 2e:5b:39:13:db:cc[0m
+[0;32mI (12969) wifi:security: WPA2-PSK, phy: bgn, rssi: -33[0m
+[0;32mI (12979) wifi:pm start, type: 1[0m
+
+[0;32mI (12979) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (12989) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us[0m
+[0;32mI (12989) wifi:AP's beacon interval = 102400 us, DTIM period = 2[0m
+[0;32mI (13059) wifi:<ba-add>idx:0 (ifx:0, 2e:5b:39:13:db:cc), tid:0, ssn:0, winSize:64[0m
+[0;32mI (13639) wifi:<ba-add>idx:1 (ifx:0, 2e:5b:39:13:db:cc), tid:6, ssn:2, winSize:64[0m
+[0;32mI (14099) esp_netif_handlers: sta ip: 192.168.179.66, mask: 255.255.255.0, gw: 192.168.179.188[0m
+[0;32mI (14099) WiFi_STA: isConnected: 1 [0m
+[0;32mI (14099) WiFi_STA: Uzyskano IP: 192.168.179.66[0m
+<!doctype html>
+<html>
+<head>
+    <title>Example Domain</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type="text/css">
+    body {
+        background-color: #f0f0f2;
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        
+    }
+    div {
+        width: 600px;
+        margin: 5em auto;
+        padding: 2em;
+        background-color: #fdfdff;
+        border-radius: 0.5em;
+        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);
+    }
+    a:link, a:visited {
+        color: #38488f;
+        text-decoration: none;
+    }
+    @media (max-width: 700px) {
+        div {
+            margin: 0 auto;
+            width: auto;
+        }
+    }
+    </style>    
+</head>
+
+<body>
+<div>
+    <h1>Example Domain</h1>
+    <p>This domain is for use in illustrative examples in documents. You may use this
+    domain in literature without prior coordination or asking for permission.</p>
+    <p><a href="https://www.iana.org/domains/example">More information...</a></p>
+</div>
+</body>
+</html>
+[0;32mI (15679) WiFi_STA: Status Code: 200[0m
+[0;32mI (17809) wifi:state: run -> init (0x1a0)[0m
+[0;32mI (17819) wifi:pm stop, total sleep time: 3060969 us / 4838892 us[0m
+
+[0;32mI (17819) wifi:<ba-del>idx:0, tid:0[0m
+[0;32mI (17819) wifi:<ba-del>idx:1, tid:6[0m
+[0;32mI (17819) wifi:new:<11,0>, old:<11,0>, ap:<255,255>, sta:<11,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (17829) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (17829) WiFi_STA: isConnected: 0 [0m
+[0;32mI (20249) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (20249) WiFi_STA: isConnected: 0 [0m
+[0;32mI (22659) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (22659) WiFi_STA: isConnected: 0 [0m
+[0;32mI (25079) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (25079) WiFi_STA: isConnected: 0 [0m
+[0;32mI (27489) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (27489) WiFi_STA: isConnected: 0 [0m
+[0;32mI (29909) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (29909) WiFi_STA: isConnected: 0 [0m
+[0;32mI (32319) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (32319) WiFi_STA: isConnected: 0 [0m
+[0;32mI (34729) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (34729) WiFi_STA: isConnected: 0 [0m
+[0;32mI (37149) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (37149) WiFi_STA: isConnected: 0 [0m
+[0;32mI (39559) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (39559) WiFi_STA: isConnected: 0 [0m
+[0;32mI (41979) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (41979) WiFi_STA: isConnected: 0 [0m
+[0;32mI (41989) wifi:new:<11,0>, old:<11,0>, ap:<255,255>, sta:<11,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (41989) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (42009) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (42039) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (42119) wifi:connected with Galaxy_A52s_5G, aid = 1, channel 11, BW20, bssid = 2e:5b:39:13:db:cc[0m
+[0;32mI (42119) wifi:security: WPA2-PSK, phy: bgn, rssi: -34[0m
+[0;32mI (42129) wifi:pm start, type: 1[0m
+
+[0;32mI (42129) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (42179) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us[0m
+[0;32mI (42179) wifi:AP's beacon interval = 102400 us, DTIM period = 2[0m
+[0;32mI (42239) wifi:<ba-add>idx:0 (ifx:0, 2e:5b:39:13:db:cc), tid:0, ssn:0, winSize:64[0m
+[0;32mI (42389) wifi:<ba-add>idx:1 (ifx:0, 2e:5b:39:13:db:cc), tid:6, ssn:2, winSize:64[0m
+[0;32mI (43289) esp_netif_handlers: sta ip: 192.168.179.66, mask: 255.255.255.0, gw: 192.168.179.188[0m
+[0;32mI (43289) WiFi_STA: isConnected: 1 [0m
+[0;32mI (43289) WiFi_STA: Uzyskano IP: 192.168.179.66[0m
+[0;32mI (66659) wifi:state: run -> init (0x1a0)[0m
+[0;32mI (66679) wifi:pm stop, total sleep time: 21559202 us / 24550222 us[0m
+
+[0;32mI (66679) wifi:<ba-del>idx:0, tid:0[0m
+[0;32mI (66679) wifi:<ba-del>idx:1, tid:6[0m
+[0;32mI (66679) wifi:new:<11,0>, old:<11,0>, ap:<255,255>, sta:<11,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (66689) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (66689) WiFi_STA: isConnected: 0 [0m
+[0;32mI (69109) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (69109) WiFi_STA: isConnected: 0 [0m
+[0;32mI (71519) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (71519) WiFi_STA: isConnected: 0 [0m
+[0;32mI (73939) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (73939) WiFi_STA: isConnected: 0 [0m
+[0;32mI (76349) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (76349) WiFi_STA: isConnected: 0 [0m
+[0;32mI (78769) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (78769) WiFi_STA: isConnected: 0 [0m
+[0;32mI (81179) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (81179) WiFi_STA: isConnected: 0 [0m
+[0;32mI (83599) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (83599) WiFi_STA: isConnected: 0 [0m
+[0;32mI (86009) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (86009) WiFi_STA: isConnected: 0 [0m
+[0;32mI (88419) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (88419) WiFi_STA: isConnected: 0 [0m
+[0;32mI (90839) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (90839) WiFi_STA: isConnected: 0 [0m
+[0;32mI (93249) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (93249) WiFi_STA: isConnected: 0 [0m
+[0;32mI (95669) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (95669) WiFi_STA: isConnected: 0 [0m
+[0;32mI (98079) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (98079) WiFi_STA: isConnected: 0 [0m
+[0;32mI (100499) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (100499) WiFi_STA: isConnected: 0 [0m
+[0;32mI (102909) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (102909) WiFi_STA: isConnected: 0 [0m
+[0;32mI (105319) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (105319) WiFi_STA: isConnected: 0 [0m
+[0;32mI (107739) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (107739) WiFi_STA: isConnected: 0 [0m
+[0;32mI (110149) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (110149) WiFi_STA: isConnected: 0 [0m
+[0;32mI (112569) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (112569) WiFi_STA: isConnected: 0 [0m
+[0;32mI (114979) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (114979) WiFi_STA: isConnected: 0 [0m
+[0;32mI (117399) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (117399) WiFi_STA: isConnected: 0 [0m
+[0;32mI (119809) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (119809) WiFi_STA: isConnected: 0 [0m
+[0;32mI (122219) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (122219) WiFi_STA: isConnected: 0 [0m
+[0;32mI (124639) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (124639) WiFi_STA: isConnected: 0 [0m
+[0;32mI (127049) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (127049) WiFi_STA: isConnected: 0 [0m
+[0;32mI (129469) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (129469) WiFi_STA: isConnected: 0 [0m
+[0;32mI (131879) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (131879) WiFi_STA: isConnected: 0 [0m
+[0;32mI (134299) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (134299) WiFi_STA: isConnected: 0 [0m
+[0;32mI (136709) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (136709) WiFi_STA: isConnected: 0 [0m
+[0;32mI (139119) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (139119) WiFi_STA: isConnected: 0 [0m
+[0;32mI (141539) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (141539) WiFi_STA: isConnected: 0 [0m
+[0;32mI (143949) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (143949) WiFi_STA: isConnected: 0 [0m
+[0;32mI (146369) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (146369) WiFi_STA: isConnected: 0 [0m
+[0;32mI (148779) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (148779) WiFi_STA: isConnected: 0 [0m
+[0;32mI (151189) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (151189) WiFi_STA: isConnected: 0 [0m
+[0;32mI (153609) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (153609) WiFi_STA: isConnected: 0 [0m
+[0;32mI (156019) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (156019) WiFi_STA: isConnected: 0 [0m
+[0;32mI (158439) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (158439) WiFi_STA: isConnected: 0 [0m
+[0;32mI (160849) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (160849) WiFi_STA: isConnected: 0 [0m
+[0;32mI (163259) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (163259) WiFi_STA: isConnected: 0 [0m
+[0;32mI (165679) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (165679) WiFi_STA: isConnected: 0 [0m
+[0;32mI (168089) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (168089) WiFi_STA: isConnected: 0 [0m
+[0;32mI (170499) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (170509) WiFi_STA: isConnected: 0 [0m
+[0;32mI (172919) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (172919) WiFi_STA: isConnected: 0 [0m
+[0;32mI (175329) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (175329) WiFi_STA: isConnected: 0 [0m
+[0;32mI (177749) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (177749) WiFi_STA: isConnected: 0 [0m
+[0;32mI (180159) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (180159) WiFi_STA: isConnected: 0 [0m
+[0;32mI (182569) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (182569) WiFi_STA: isConnected: 0 [0m
+[0;32mI (184989) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (184989) WiFi_STA: isConnected: 0 [0m
+[0;32mI (187399) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (187399) WiFi_STA: isConnected: 0 [0m
+[0;32mI (189819) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (189819) WiFi_STA: isConnected: 0 [0m
+[0;32mI (192229) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (192229) WiFi_STA: isConnected: 0 [0m
+[0;32mI (194639) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (194639) WiFi_STA: isConnected: 0 [0m
+[0;32mI (197059) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (197059) WiFi_STA: isConnected: 0 [0m
+[0;32mI (199469) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (199469) WiFi_STA: isConnected: 0 [0m
+[0;32mI (201889) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (201889) WiFi_STA: isConnected: 0 [0m
+[0;32mI (204299) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (204299) WiFi_STA: isConnected: 0 [0m
+[0;32mI (206709) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (206709) WiFi_STA: isConnected: 0 [0m
+[0;32mI (209129) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (209129) WiFi_STA: isConnected: 0 [0m
+[0;32mI (211539) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (211539) WiFi_STA: isConnected: 0 [0m
+[0;32mI (213959) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (213959) WiFi_STA: isConnected: 0 [0m
+[0;32mI (216369) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (216369) WiFi_STA: isConnected: 0 [0m
+[0;32mI (218779) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (218779) WiFi_STA: isConnected: 0 [0m
+[0;32mI (221199) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (221199) WiFi_STA: isConnected: 0 [0m
+[0;32mI (223609) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (223609) WiFi_STA: isConnected: 0 [0m
+[0;32mI (226029) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (226029) WiFi_STA: isConnected: 0 [0m
+[0;32mI (228439) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (228439) WiFi_STA: isConnected: 0 [0m
+[0;32mI (230849) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (230849) WiFi_STA: isConnected: 0 [0m
+[0;32mI (233269) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (233269) WiFi_STA: isConnected: 0 [0m
+[0;32mI (235679) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (235679) WiFi_STA: isConnected: 0 [0m
+[0;32mI (238089) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (238099) WiFi_STA: isConnected: 0 [0m
+[0;32mI (240509) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (240509) WiFi_STA: isConnected: 0 [0m
+[0;32mI (242919) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (242919) WiFi_STA: isConnected: 0 [0m
+[0;32mI (245339) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (245339) WiFi_STA: isConnected: 0 [0m
+[0;32mI (247749) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (247749) WiFi_STA: isConnected: 0 [0m
+[0;32mI (250159) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (250159) WiFi_STA: isConnected: 0 [0m
+[0;32mI (252579) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (252579) WiFi_STA: isConnected: 0 [0m
+[0;32mI (254989) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (254989) WiFi_STA: isConnected: 0 [0m
+[0;32mI (257409) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (257409) WiFi_STA: isConnected: 0 [0m
+[0;32mI (259819) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (259819) WiFi_STA: isConnected: 0 [0m
+[0;32mI (262229) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (262229) WiFi_STA: isConnected: 0 [0m
+[0;32mI (264649) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (264649) WiFi_STA: isConnected: 0 [0m
+[0;32mI (267059) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (267059) WiFi_STA: isConnected: 0 [0m
+[0;32mI (269479) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (269479) WiFi_STA: isConnected: 0 [0m
+[0;32mI (271889) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (271889) WiFi_STA: isConnected: 0 [0m
+[0;32mI (274299) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (274299) WiFi_STA: isConnected: 0 [0m
+[0;32mI (276719) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (276719) WiFi_STA: isConnected: 0 [0m
+[0;32mI (279129) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (279129) WiFi_STA: isConnected: 0 [0m
+[0;32mI (281549) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (281549) WiFi_STA: isConnected: 0 [0m
+[0;32mI (283959) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (283959) WiFi_STA: isConnected: 0 [0m
+[0;32mI (286369) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (286369) WiFi_STA: isConnected: 0 [0m
+[0;32mI (288789) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (288789) WiFi_STA: isConnected: 0 [0m
+[0;32mI (291199) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (291199) WiFi_STA: isConnected: 0 [0m
+[0;32mI (293619) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (293619) WiFi_STA: isConnected: 0 [0m
+[0;32mI (296029) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (296029) WiFi_STA: isConnected: 0 [0m
+[0;32mI (298439) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (298439) WiFi_STA: isConnected: 0 [0m
+[0;32mI (300859) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (300859) WiFi_STA: isConnected: 0 [0m
+[0;32mI (303269) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (303269) WiFi_STA: isConnected: 0 [0m
+[0;32mI (305679) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (305689) WiFi_STA: isConnected: 0 [0m
+[0;32mI (308099) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (308099) WiFi_STA: isConnected: 0 [0m
+[0;32mI (310509) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (310509) WiFi_STA: isConnected: 0 [0m
+[0;32mI (312929) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (312929) WiFi_STA: isConnected: 0 [0m
+[0;32mI (315339) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (315339) WiFi_STA: isConnected: 0 [0m
+[0;32mI (317749) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (317749) WiFi_STA: isConnected: 0 [0m
+[0;32mI (320169) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (320169) WiFi_STA: isConnected: 0 [0m
+[0;32mI (322579) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (322579) WiFi_STA: isConnected: 0 [0m
+[0;32mI (324999) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (324999) WiFi_STA: isConnected: 0 [0m
+[0;32mI (327409) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (327409) WiFi_STA: isConnected: 0 [0m
+[0;32mI (329819) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (329819) WiFi_STA: isConnected: 0 [0m
+[0;32mI (332239) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (332239) WiFi_STA: isConnected: 0 [0m
+[0;32mI (334649) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (334649) WiFi_STA: isConnected: 0 [0m
+[0;32mI (337069) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (337069) WiFi_STA: isConnected: 0 [0m
+[0;32mI (339479) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (339479) WiFi_STA: isConnected: 0 [0m
+[0;32mI (341889) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (341889) WiFi_STA: isConnected: 0 [0m
+[0;32mI (344309) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (344309) WiFi_STA: isConnected: 0 [0m
+[0;32mI (346719) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (346719) WiFi_STA: isConnected: 0 [0m
+[0;32mI (349139) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (349139) WiFi_STA: isConnected: 0 [0m
+[0;32mI (351549) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (351549) WiFi_STA: isConnected: 0 [0m
+[0;32mI (353959) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (353959) WiFi_STA: isConnected: 0 [0m
+[0;32mI (356379) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (356379) WiFi_STA: isConnected: 0 [0m
+[0;32mI (358789) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (358789) WiFi_STA: isConnected: 0 [0m
+[0;32mI (361199) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (361209) WiFi_STA: isConnected: 0 [0m
+[0;32mI (363619) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (363619) WiFi_STA: isConnected: 0 [0m
+[0;32mI (366029) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (366029) WiFi_STA: isConnected: 0 [0m
+[0;32mI (368449) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (368449) WiFi_STA: isConnected: 0 [0m
+[0;32mI (370859) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (370859) WiFi_STA: isConnected: 0 [0m
+[0;32mI (373269) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (373269) WiFi_STA: isConnected: 0 [0m
+[0;32mI (375689) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (375689) WiFi_STA: isConnected: 0 [0m
+[0;32mI (378099) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (378099) WiFi_STA: isConnected: 0 [0m
+[0;32mI (380519) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (380519) WiFi_STA: isConnected: 0 [0m
+[0;32mI (382929) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (382929) WiFi_STA: isConnected: 0 [0m
+[0;32mI (385339) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (385339) WiFi_STA: isConnected: 0 [0m
+[0;32mI (387759) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (387759) WiFi_STA: isConnected: 0 [0m
+[0;32mI (390169) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (390169) WiFi_STA: isConnected: 0 [0m
+[0;32mI (392589) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (392589) WiFi_STA: isConnected: 0 [0m
+[0;32mI (394999) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (394999) WiFi_STA: isConnected: 0 [0m
+[0;32mI (397409) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (397409) WiFi_STA: isConnected: 0 [0m
+[0;32mI (399829) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (399829) WiFi_STA: isConnected: 0 [0m
+[0;32mI (402239) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (402239) WiFi_STA: isConnected: 0 [0m
+[0;32mI (404649) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (404659) WiFi_STA: isConnected: 0 [0m
+[0;32mI (407069) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (407069) WiFi_STA: isConnected: 0 [0m
+[0;32mI (409479) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (409479) WiFi_STA: isConnected: 0 [0m
+[0;32mI (411899) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (411899) WiFi_STA: isConnected: 0 [0m
+[0;32mI (414309) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (414309) WiFi_STA: isConnected: 0 [0m
+[0;32mI (414319) wifi:new:<11,0>, old:<11,0>, ap:<255,255>, sta:<11,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (414319) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (414329) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (414359) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (414389) wifi:connected with Galaxy_A52s_5G, aid = 1, channel 11, BW20, bssid = 2e:5b:39:13:db:cc[0m
+[0;32mI (414389) wifi:security: WPA2-PSK, phy: bgn, rssi: -33[0m
+[0;32mI (414399) wifi:pm start, type: 1[0m
+
+[0;32mI (414399) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (414429) wifi:<ba-add>idx:0 (ifx:0, 2e:5b:39:13:db:cc), tid:0, ssn:0, winSize:64[0m
+[0;32mI (414459) wifi:dp: 2, bi: 102400, li: 4, scale listen interval from 307200 us to 409600 us[0m
+[0;32mI (414459) wifi:AP's beacon interval = 102400 us, DTIM period = 2[0m
+[0;32mI (415469) esp_netif_handlers: sta ip: 192.168.179.66, mask: 255.255.255.0, gw: 192.168.179.188[0m
+[0;32mI (415469) WiFi_STA: isConnected: 1 [0m
+[0;32mI (415469) WiFi_STA: Uzyskano IP: 192.168.179.66[0m
+[0;32mI (425119) wifi:state: run -> init (0x1a0)[0m
+[0;32mI (425129) wifi:pm stop, total sleep time: 9433750 us / 10728790 us[0m
+
+[0;32mI (425129) wifi:<ba-del>idx:0, tid:0[0m
+[0;32mI (425129) wifi:new:<11,0>, old:<11,0>, ap:<255,255>, sta:<11,0>, prof:1, snd_ch_cfg:0x0[0m
+[0;32mI (425129) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (425139) WiFi_STA: isConnected: 0 [0m
+[0;32mI (427559) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (427559) WiFi_STA: isConnected: 0 [0m
+[0;32mI (429969) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (429969) WiFi_STA: isConnected: 0 [0m
+[0;32mI (432379) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (432379) WiFi_STA: isConnected: 0 [0m
+[0;32mI (434799) WiFi_STA: Połączenie WiFi utracone, ponawianie próby...[0m
+[0;32mI (434799) WiFi_STA: isConnected: 0 [0m
+[0;32mI
