@@ -1812,7 +1812,7 @@ rule C_STATIC_LIBRARY_LINKER____idf_main_
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /usr/bin/cmake --regenerate-during-build -S/home/radek/agh_przedmioty/rok_III/IoT/MQTT/tcp -B/home/radek/agh_przedmioty/rok_III/IoT/MQTT/tcp/build
+  command = /usr/bin/cmake --regenerate-during-build -S/home/radek/agh_przedmioty/rok_III/IoT/Zadania/tcp -B/home/radek/agh_przedmioty/rok_III/IoT/Zadania/tcp/build
   description = Re-running CMake...
   generator = 1
 

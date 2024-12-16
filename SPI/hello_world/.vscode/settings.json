@@ -1,0 +1,6 @@
+{
+    "C_Cpp.intelliSenseEngine": "default",
+    "idf.espIdfPath": "/home/radek/esp-idf",
+    "idf.toolsPath": "/home/radek/.espressif",
+    "idf.flashType": "UART"
+}

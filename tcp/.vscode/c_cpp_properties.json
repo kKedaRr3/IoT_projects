@@ -7,7 +7,8 @@
             "includePath": [
                 "${config:idf.espIdfPath}/components/**",
                 "${config:idf.espIdfPathWin}/components/**",
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "/home/radek/esp-idf/examples/common_components/protocol_examples_common/include"
             ],
             "browse": {
                 "path": [

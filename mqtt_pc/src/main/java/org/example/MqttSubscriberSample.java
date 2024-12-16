@@ -7,9 +7,9 @@ public class MqttSubscriberSample {
 
     public static void main(String[] args) {
 
-        String topic1 = "/topic/data1";
-        String topic2 = "/topic/data2";
-        String broker = "tcp://192.168.209.28:1883";
+        String topic1 = "/data/accelerometer";
+        String topic2 = "/data/magnetometer";
+        String broker = "tcp://192.168.138.28:1883";
         String clientId = "JavaSample";
         MemoryPersistence persistence = new MemoryPersistence();
 

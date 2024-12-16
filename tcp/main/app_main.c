@@ -2,6 +2,8 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
+#include "cJSON.h"
 #include <inttypes.h>
 #include "esp_system.h"
 #include "nvs_flash.h"
@@ -11,10 +13,13 @@
 
 #include "esp_log.h"
 #include "mqtt_client.h"
+#include "esp_system.h"
 
 static const char *TAG = "mqtt_example";
 void publish_task(void *pvParameter);
 static TaskHandle_t publishTaskHandle = NULL;
+
+static char client_id[32];
 
 
 static void log_error_if_nonzero(const char *message, int error_code)
@@ -31,8 +36,11 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
     esp_mqtt_client_handle_t client = event->client;
     switch ((esp_mqtt_event_id_t)event_id) {
     case MQTT_EVENT_CONNECTED:
-        esp_mqtt_client_subscribe(client, "/topic/response1", 0);
-        esp_mqtt_client_subscribe(client, "/topic/response2", 0);
+
+        printf("%s\n", client_id);
+
+        esp_mqtt_client_subscribe(client, "/response/accelerometer", 0);
+        esp_mqtt_client_subscribe(client, "/response/magnetometer", 0);
         xTaskCreate(&publish_task, "Publish Task", 4096, (void *)client, 5,  &publishTaskHandle);
         break;
     case MQTT_EVENT_DISCONNECTED:
@@ -77,6 +85,7 @@ static void mqtt_app_start(void)
 {
     esp_mqtt_client_config_t mqtt_cfg = {
         .broker.address.uri = CONFIG_BROKER_URL,
+        .credentials.client_id = client_id,
     };
 
 
@@ -86,14 +95,60 @@ static void mqtt_app_start(void)
 }
 
 
+char* get_sensor_data_json(const char *name) {
+    cJSON *root = cJSON_CreateObject();
+
+    if (strcmp(name, "accelerometer") == 0) {
+        cJSON *accelerometer = cJSON_CreateObject();
+        cJSON_AddNumberToObject(accelerometer, "x", 0.00123);
+        cJSON_AddNumberToObject(accelerometer, "y", -0.00456);
+        cJSON_AddNumberToObject(accelerometer, "z", 9.81234);
+        cJSON_AddStringToObject(accelerometer, "unit", "m/s²");
+        cJSON_AddStringToObject(accelerometer, "timestamp", "2024-11-27T12:34:56Z");
+
+        cJSON_AddItemToObject(root, "accelerometer", accelerometer);
+    } 
+    else if (strcmp(name, "magnetometer") == 0) {
+        cJSON *magnetometer = cJSON_CreateObject();
+        cJSON_AddNumberToObject(magnetometer, "x", 0.12345);
+        cJSON_AddNumberToObject(magnetometer, "y", -0.23456);
+        cJSON_AddNumberToObject(magnetometer, "z", 0.34567);
+        cJSON_AddStringToObject(magnetometer, "unit", "μT");
+        cJSON_AddStringToObject(magnetometer, "timestamp", "2024-11-27T12:34:56Z");
+
+        cJSON_AddItemToObject(root, "magnetometer", magnetometer);
+    } 
+    else {
+        ESP_LOGW("JSON", "Unsupported device name: %s", name);
+        cJSON_Delete(root);
+        return NULL;
+    }
+
+    cJSON *client_info = cJSON_CreateObject();
+    cJSON_AddStringToObject(client_info, "client_id", client_id);
+
+    cJSON_AddItemToObject(root, "client_info", client_info);
+
+    char *json_string = cJSON_PrintUnformatted(root); 
+
+    cJSON_Delete(root); 
+
+    return json_string;
+}
+
 void publish_task(void *pvParameter){
     esp_mqtt_client_handle_t client = (esp_mqtt_client_handle_t)pvParameter;
 
     while(1){
-        esp_mqtt_client_publish(client, "/topic/data1", "data_1", 0, 1, 0);
+        
+        char* json_acc_data = get_sensor_data_json("accelerometer");
+        char* json_mag_data = get_sensor_data_json("magnetometer");
 
-        esp_mqtt_client_publish(client, "/topic/data2", "data_2", 0, 1, 0);
+        esp_mqtt_client_publish(client, "/data/accelerometer", json_acc_data, 0, 1, 0);
+        esp_mqtt_client_publish(client, "/data/magnetometer", json_mag_data, 0, 1, 0);
 
+        free(json_acc_data);
+        free(json_mag_data);
         vTaskDelay(5000 / portTICK_PERIOD_MS);
     }
 }
@@ -101,6 +156,7 @@ void publish_task(void *pvParameter){
 
 void app_main(void)
 {
+
     ESP_LOGI(TAG, "[APP] Startup..");
     ESP_LOGI(TAG, "[APP] Free memory: %" PRIu32 " bytes", esp_get_free_heap_size());
     ESP_LOGI(TAG, "[APP] IDF version: %s", esp_get_idf_version());
@@ -119,5 +175,11 @@ void app_main(void)
 
     ESP_ERROR_CHECK(example_connect());
 
+    srand(time(NULL));
+    uint32_t random_number = rand() % 1000000;
+    snprintf(client_id, sizeof(client_id), "ESP_MQTT_Client_%06lu", (unsigned long)random_number);
+
+
     mqtt_app_start();
 }
+

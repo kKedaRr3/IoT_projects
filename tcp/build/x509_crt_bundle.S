@@ -1,4 +1,4 @@
-/* * Data converted from /home/radek/agh_przedmioty/rok_III/IoT/MQTT/tcp/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from /home/radek/agh_przedmioty/rok_III/IoT/Zadania/tcp/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 #if !defined (__APPLE__) && !defined (__linux__)

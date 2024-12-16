@@ -1,4 +1,4 @@
-# Install script for directory: /home/radek/agh_przedmioty/rok_III/IoT/MQTT/tcp/main
+# Install script for directory: /home/radek/agh_przedmioty/rok_III/IoT/Zadania/tcp/main
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
