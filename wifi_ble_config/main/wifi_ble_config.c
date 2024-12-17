@@ -35,29 +35,52 @@ static bool credentials_received = false;
 static bool ble_server_stopping = false;
 static bool ble_connected = false;
 static bool ble_initialized = false;
+static bool end_config = false;
 
 static uint8_t char_prop_read_write = ESP_GATT_CHAR_PROP_BIT_READ | ESP_GATT_CHAR_PROP_BIT_WRITE;
 
-static const uint16_t wifi_service_uuid = 0x00FF;
-static const uint16_t wifi_ssid_uuid = 0xFF01;
-static const uint16_t wifi_pass_uuid = 0xFF02;
-static const uint16_t primary_service_uuid = ESP_GATT_UUID_PRI_SERVICE;
+static const uint16_t wifi_service_uuid       = 0x00FF;
+static const uint16_t wifi_ssid_uuid          = 0xFF01;
+static const uint16_t wifi_pass_uuid          = 0xFF02;
+static const uint16_t wifi_meas_freq_uuid     = 0xFF03;
+static const uint16_t wifi_send_freq_uuid     = 0xFF04;
+static const uint16_t mqtt_broker_uuid        = 0xFF05;
+static const uint16_t exit_config_uuid        = 0xFF06;
+static const uint16_t primary_service_uuid    = ESP_GATT_UUID_PRI_SERVICE;
 static const uint16_t character_declaration_uuid = ESP_GATT_UUID_CHAR_DECLARE;
+static const uint16_t char_user_desc_uuid     = ESP_GATT_UUID_CHAR_DESCRIPTION;
+
+// User descriptions for characteristics
+static const uint8_t ssid_char_user_desc[]          = "SSID";
+static const uint8_t pass_char_user_desc[]          = "Password";
+static const uint8_t meas_freq_char_user_desc[]     = "Measuring Frequency";
+static const uint8_t send_freq_char_user_desc[]     = "Sending Frequency";
+static const uint8_t mqtt_broker_char_user_desc[]   = "MQTT Broker Address";
+static const uint8_t exit_config_char_user_desc[]   = "Exit Configuration Mode";
 
 // Wi-Fi credentials structure
 typedef struct {
-    char ssid[32];
+    char ssid[64];
     char password[64];
 } wifi_credentials_t;
 
 wifi_credentials_t wifi_credentials = {0};
 
+// Additional configuration parameters
+typedef struct {
+    char measuring_frequency[64];  // Could be numeric or string
+    char sending_frequency[64];    // Could be numeric or string
+    char mqtt_broker[64];
+} device_config_t;
+
+static device_config_t device_config = {0};
+
 // Function prototypes
 void start_ble_server(void);
 void stop_ble_server(void);
 void wifi_init(void);
-void save_wifi_credentials(const wifi_credentials_t *credentials);
-void load_wifi_credentials(wifi_credentials_t *credentials);
+void save_credentials(const wifi_credentials_t *credentials, const device_config_t *device_config);
+void load_credentials(wifi_credentials_t *credentials, device_config_t *device_config);
 void check_button_press(void *arg);
 void blink_led_task(void *pvParameter);
 void fetch_webpage_task(void *pvParameter);
@@ -72,28 +95,23 @@ void wifi_status_logger_task(void *pvParameter);
 static uint8_t adv_config_done = 0;
 
 #define adv_config_flag      (1 << 0)
-#define scan_rsp_config_flag (1 << 1)
 
-// Advertising Service UUID (128-bit)
 static uint8_t adv_service_uuid128[16] = {
-    /* LSB <--------------------------------------------------------------------------------> MSB */
-    // First UUID, 16-bit, [12],[13] is the value
     0xfb, 0x34, 0x9b, 0x5f, 0x80, 0x00, 0x00, 0x80,
-    0x00, 0x10, 0x00, 0x00, 
-    (wifi_service_uuid & 0xFF), 
-    ((wifi_service_uuid >> 8) & 0xFF), 
+    0x00, 0x10, 0x00, 0x00,
+    (wifi_service_uuid & 0xFF),
+    ((wifi_service_uuid >> 8) & 0xFF),
     0x00, 0x00,
 };
 
-// Advertising data
 static esp_ble_adv_data_t adv_data = {
     .set_scan_rsp        = false,
     .include_name        = true,
     .include_txpower     = true,
-    .min_interval        = 0x0006,  // slave connection min interval, Time = min_interval * 1.25 msec
-    .max_interval        = 0x0010,  // slave connection max interval, Time = max_interval * 1.25 msec
+    .min_interval        = 0x0006,
+    .max_interval        = 0x0010,
     .appearance          = 0x00,
-    .manufacturer_len    = 0,       // No manufacturer data
+    .manufacturer_len    = 0,
     .p_manufacturer_data = NULL,
     .service_data_len    = 0,
     .p_service_data      = NULL,
@@ -102,7 +120,6 @@ static esp_ble_adv_data_t adv_data = {
     .flag                = (ESP_BLE_ADV_FLAG_GEN_DISC | ESP_BLE_ADV_FLAG_BREDR_NOT_SPT),
 };
 
-// Advertising parameters
 static esp_ble_adv_params_t adv_params = {
     .adv_int_min        = 0x20,
     .adv_int_max        = 0x40,
@@ -115,10 +132,31 @@ static esp_ble_adv_params_t adv_params = {
 // Handle table to keep track of attribute handles
 enum {
     IDX_SVC,
+
     IDX_CHAR_SSID_DECL,
     IDX_CHAR_SSID_VAL,
+    IDX_CHAR_SSID_DESC,
+
     IDX_CHAR_PASS_DECL,
     IDX_CHAR_PASS_VAL,
+    IDX_CHAR_PASS_DESC,
+
+    IDX_CHAR_MEAS_FREQ_DECL,
+    IDX_CHAR_MEAS_FREQ_VAL,
+    IDX_CHAR_MEAS_FREQ_DESC,
+
+    IDX_CHAR_SEND_FREQ_DECL,
+    IDX_CHAR_SEND_FREQ_VAL,
+    IDX_CHAR_SEND_FREQ_DESC,
+
+    IDX_CHAR_MQTT_BROKER_DECL,
+    IDX_CHAR_MQTT_BROKER_VAL,
+    IDX_CHAR_MQTT_BROKER_DESC,
+
+    IDX_CHAR_EXIT_CONFIG_DECL,
+    IDX_CHAR_EXIT_CONFIG_VAL,
+    IDX_CHAR_EXIT_CONFIG_DESC,
+
     HRS_IDX_NB,
 };
 
@@ -153,6 +191,15 @@ static esp_gatts_attr_db_t gatt_db[HRS_IDX_NB] = {
         }
     },
 
+    // Wi-Fi SSID Characteristic User Description
+    [IDX_CHAR_SSID_DESC] = {
+        {ESP_GATT_AUTO_RSP},
+        {
+            ESP_UUID_LEN_16, (uint8_t *)&char_user_desc_uuid, ESP_GATT_PERM_READ,
+            sizeof(ssid_char_user_desc)-1, sizeof(ssid_char_user_desc)-1, (uint8_t*)ssid_char_user_desc
+        }
+    },
+
     // Wi-Fi Password Characteristic Declaration
     [IDX_CHAR_PASS_DECL] = {
         {ESP_GATT_AUTO_RSP},
@@ -170,6 +217,123 @@ static esp_gatts_attr_db_t gatt_db[HRS_IDX_NB] = {
             sizeof(wifi_credentials.password), 0, NULL
         }
     },
+
+    // Wi-Fi Password Characteristic User Description
+    [IDX_CHAR_PASS_DESC] = {
+        {ESP_GATT_AUTO_RSP},
+        {
+            ESP_UUID_LEN_16, (uint8_t *)&char_user_desc_uuid, ESP_GATT_PERM_READ,
+            sizeof(pass_char_user_desc)-1, sizeof(pass_char_user_desc)-1, (uint8_t*)pass_char_user_desc
+        }
+    },
+
+    // Measuring Frequency Characteristic Declaration
+    [IDX_CHAR_MEAS_FREQ_DECL] = {
+        {ESP_GATT_AUTO_RSP},
+        {
+            ESP_UUID_LEN_16, (uint8_t *)&character_declaration_uuid, ESP_GATT_PERM_READ,
+            1, 1, (uint8_t *)&char_prop_read_write
+        }
+    },
+
+    // Measuring Frequency Characteristic Value
+    [IDX_CHAR_MEAS_FREQ_VAL] = {
+        {ESP_GATT_AUTO_RSP},
+        {
+            ESP_UUID_LEN_16, (uint8_t *)&wifi_meas_freq_uuid, ESP_GATT_PERM_READ | ESP_GATT_PERM_WRITE,
+            sizeof(device_config.measuring_frequency), 0, NULL
+        }
+    },
+
+    // Measuring Frequency User Description
+    [IDX_CHAR_MEAS_FREQ_DESC] = {
+        {ESP_GATT_AUTO_RSP},
+        {
+            ESP_UUID_LEN_16, (uint8_t *)&char_user_desc_uuid, ESP_GATT_PERM_READ,
+            sizeof(meas_freq_char_user_desc)-1, sizeof(meas_freq_char_user_desc)-1, (uint8_t*)meas_freq_char_user_desc
+        }
+    },
+
+    // Sending Frequency Characteristic Declaration
+    [IDX_CHAR_SEND_FREQ_DECL] = {
+        {ESP_GATT_AUTO_RSP},
+        {
+            ESP_UUID_LEN_16, (uint8_t *)&character_declaration_uuid, ESP_GATT_PERM_READ,
+            1, 1, (uint8_t *)&char_prop_read_write
+        }
+    },
+
+    // Sending Frequency Characteristic Value
+    [IDX_CHAR_SEND_FREQ_VAL] = {
+        {ESP_GATT_AUTO_RSP},
+        {
+            ESP_UUID_LEN_16, (uint8_t *)&wifi_send_freq_uuid, ESP_GATT_PERM_READ | ESP_GATT_PERM_WRITE,
+            sizeof(device_config.sending_frequency), 0, NULL
+        }
+    },
+
+    // Sending Frequency User Description
+    [IDX_CHAR_SEND_FREQ_DESC] = {
+        {ESP_GATT_AUTO_RSP},
+        {
+            ESP_UUID_LEN_16, (uint8_t *)&char_user_desc_uuid, ESP_GATT_PERM_READ,
+            sizeof(send_freq_char_user_desc)-1, sizeof(send_freq_char_user_desc)-1, (uint8_t*)send_freq_char_user_desc
+        }
+    },
+
+    // MQTT Broker Characteristic Declaration
+    [IDX_CHAR_MQTT_BROKER_DECL] = {
+        {ESP_GATT_AUTO_RSP},
+        {
+            ESP_UUID_LEN_16, (uint8_t *)&character_declaration_uuid, ESP_GATT_PERM_READ,
+            1, 1, (uint8_t *)&char_prop_read_write
+        }
+    },
+
+    // MQTT Broker Characteristic Value
+    [IDX_CHAR_MQTT_BROKER_VAL] = {
+        {ESP_GATT_AUTO_RSP},
+        {
+            ESP_UUID_LEN_16, (uint8_t *)&mqtt_broker_uuid, ESP_GATT_PERM_READ | ESP_GATT_PERM_WRITE,
+            sizeof(device_config.mqtt_broker), 0, NULL
+        }
+    },
+
+    // MQTT Broker User Description
+    [IDX_CHAR_MQTT_BROKER_DESC] = {
+        {ESP_GATT_AUTO_RSP},
+        {
+            ESP_UUID_LEN_16, (uint8_t *)&char_user_desc_uuid, ESP_GATT_PERM_READ,
+            sizeof(mqtt_broker_char_user_desc)-1, sizeof(mqtt_broker_char_user_desc)-1, (uint8_t*)mqtt_broker_char_user_desc
+        }
+    },
+
+    // Exit Configuration Mode Characteristic Declaration
+    [IDX_CHAR_EXIT_CONFIG_DECL] = {
+        {ESP_GATT_AUTO_RSP},
+        {
+            ESP_UUID_LEN_16, (uint8_t *)&character_declaration_uuid, ESP_GATT_PERM_READ,
+            1, 1, (uint8_t *)&char_prop_read_write
+        }
+    },
+
+    // Exit Configuration Mode Characteristic Value
+    [IDX_CHAR_EXIT_CONFIG_VAL] = {
+        {ESP_GATT_AUTO_RSP},
+        {
+            ESP_UUID_LEN_16, (uint8_t *)&exit_config_uuid, ESP_GATT_PERM_READ | ESP_GATT_PERM_WRITE,
+            sizeof(uint8_t), 0, NULL
+        }
+    },
+
+    // Exit Configuration Mode User Description
+    [IDX_CHAR_EXIT_CONFIG_DESC] = {
+        {ESP_GATT_AUTO_RSP},
+        {
+            ESP_UUID_LEN_16, (uint8_t *)&char_user_desc_uuid, ESP_GATT_PERM_READ,
+            sizeof(exit_config_char_user_desc)-1, sizeof(exit_config_char_user_desc)-1, (uint8_t*)exit_config_char_user_desc
+        }
+    },
 };
 
 // GATT Profile Instance Structure
@@ -182,7 +346,6 @@ typedef struct {
     esp_gatt_srvc_id_t service_id;
 } gatts_profile_inst_t;
 
-// Initialize GATT profile table
 static gatts_profile_inst_t gl_profile_tab[PROFILE_NUM] = {
     [PROFILE_APP_IDX] = {
         .gatts_cb = gatts_profile_event_handler,
@@ -240,7 +403,7 @@ static void gatts_profile_event_handler(esp_gatts_cb_event_t event,
             if (param->add_attr_tab.status != ESP_GATT_OK){
                 ESP_LOGE(TAG, "Create attribute table failed, error code=0x%x", param->add_attr_tab.status);
             } else if (param->add_attr_tab.num_handle != HRS_IDX_NB){
-                ESP_LOGE(TAG, "Create attribute table abnormally, num_handle (%d) doesn't equal to HRS_IDX_NB(%d)",
+                ESP_LOGE(TAG, "Create attribute table abnormally, num_handle (%d) doesn't match HRS_IDX_NB(%d)",
                     param->add_attr_tab.num_handle, HRS_IDX_NB);
             } else {
                 memcpy(handle_table, param->add_attr_tab.handles, sizeof(handle_table));
@@ -251,36 +414,52 @@ static void gatts_profile_event_handler(esp_gatts_cb_event_t event,
 
         case ESP_GATTS_WRITE_EVT: {
             ESP_LOGI(TAG, "ESP_GATTS_WRITE_EVT, handle = %d", param->write.handle);
-            ESP_LOGI(TAG, "IDX_CHAR_SSID_VAL handle = %d", handle_table[IDX_CHAR_SSID_VAL]);
-            ESP_LOGI(TAG, "IDX_CHAR_PASS_VAL handle = %d", handle_table[IDX_CHAR_PASS_VAL]);
 
             if (!param->write.is_prep){
                 esp_gatt_status_t status = ESP_GATT_OK;
-                if (param->write.handle == handle_table[IDX_CHAR_SSID_VAL]) {  // SSID
-                    // Save SSID
+
+                if (param->write.handle == handle_table[IDX_CHAR_SSID_VAL]) {
                     memset(wifi_credentials.ssid, 0, sizeof(wifi_credentials.ssid));
                     memcpy(wifi_credentials.ssid, param->write.value, param->write.len);
-                    if (param->write.len < sizeof(wifi_credentials.ssid)) {
-                        wifi_credentials.ssid[param->write.len] = '\0'; // Null-terminate the string
-                    } else {
-                        wifi_credentials.ssid[sizeof(wifi_credentials.ssid) - 1] = '\0';
-                    }
+                    wifi_credentials.ssid[param->write.len < sizeof(wifi_credentials.ssid) ? param->write.len : sizeof(wifi_credentials.ssid)-1] = '\0';
                     ESP_LOGI(TAG, "Received SSID: %s", wifi_credentials.ssid);
-                } else if (param->write.handle == handle_table[IDX_CHAR_PASS_VAL]) {  // Password
-                    // Save Password
+
+                } else if (param->write.handle == handle_table[IDX_CHAR_PASS_VAL]) {
                     memset(wifi_credentials.password, 0, sizeof(wifi_credentials.password));
                     memcpy(wifi_credentials.password, param->write.value, param->write.len);
-                    if (param->write.len < sizeof(wifi_credentials.password)) {
-                        wifi_credentials.password[param->write.len] = '\0'; // Null-terminate the string
-                    } else {
-                        wifi_credentials.password[sizeof(wifi_credentials.password) - 1] = '\0';
-                    }
+                    wifi_credentials.password[param->write.len < sizeof(wifi_credentials.password) ? param->write.len : sizeof(wifi_credentials.password)-1] = '\0';
                     ESP_LOGI(TAG, "Received Password: %s", wifi_credentials.password);
 
-                    // Set the flag to indicate credentials are received
+                    // Credentials fully received when password is also written
                     credentials_received = true;
+
+                } else if (param->write.handle == handle_table[IDX_CHAR_MEAS_FREQ_VAL]) {
+                    memset(device_config.measuring_frequency, 0, sizeof(device_config.measuring_frequency));
+                    memcpy(device_config.measuring_frequency, param->write.value, param->write.len);
+                    device_config.measuring_frequency[param->write.len < sizeof(device_config.measuring_frequency) ? param->write.len : sizeof(device_config.measuring_frequency)-1] = '\0';
+                    ESP_LOGI(TAG, "Received Measuring Frequency: %s", device_config.measuring_frequency);
+
+                } else if (param->write.handle == handle_table[IDX_CHAR_SEND_FREQ_VAL]) {
+                    memset(device_config.sending_frequency, 0, sizeof(device_config.sending_frequency));
+                    memcpy(device_config.sending_frequency, param->write.value, param->write.len);
+                    device_config.sending_frequency[param->write.len < sizeof(device_config.sending_frequency) ? param->write.len : sizeof(device_config.sending_frequency)-1] = '\0';
+                    ESP_LOGI(TAG, "Received Sending Frequency: %s", device_config.sending_frequency);
+
+                } else if (param->write.handle == handle_table[IDX_CHAR_MQTT_BROKER_VAL]) {
+                    memset(device_config.mqtt_broker, 0, sizeof(device_config.mqtt_broker));
+                    memcpy(device_config.mqtt_broker, param->write.value, param->write.len);
+                    device_config.mqtt_broker[param->write.len < sizeof(device_config.mqtt_broker) ? param->write.len : sizeof(device_config.mqtt_broker)-1] = '\0';
+                    ESP_LOGI(TAG, "Received MQTT Broker: %s", device_config.mqtt_broker);
+
+                } else if (param->write.handle == handle_table[IDX_CHAR_EXIT_CONFIG_VAL]) {
+                    ESP_LOGI(TAG, "Received Exit Config command. Exiting configuration mode...");
+                    
+                    isConfigMode = false;
+                    end_config = true;
+                    stop_ble_server();
                 }
-                // Send response
+
+                // Send response if needed
                 if (param->write.need_rsp) {
                     esp_gatt_rsp_t rsp;
                     memset(&rsp, 0, sizeof(esp_gatt_rsp_t));
@@ -299,13 +478,12 @@ static void gatts_profile_event_handler(esp_gatts_cb_event_t event,
         case ESP_GATTS_CONNECT_EVT:
             ESP_LOGI(TAG, "ESP_GATTS_CONNECT_EVT, conn_id = %d", param->connect.conn_id);
             gl_profile_tab[PROFILE_APP_IDX].conn_id = param->connect.conn_id;
-            ble_connected = true; // Update connection status
+            ble_connected = true;
             break;
         case ESP_GATTS_DISCONNECT_EVT:
             ESP_LOGI(TAG, "ESP_GATTS_DISCONNECT_EVT, reason = %d", param->disconnect.reason);
-            ble_connected = false; // Update connection status
+            ble_connected = false;
             if (!ble_server_stopping) {
-                // Start advertising again
                 esp_ble_gap_start_advertising(&adv_params);
             } else {
                 ESP_LOGI(TAG, "BLE server is stopping, not restarting advertising");
@@ -319,13 +497,15 @@ static void gatts_profile_event_handler(esp_gatts_cb_event_t event,
 // Credentials Handling Task
 void credentials_task(void *pvParameter) {
     while (true) {
-        if (credentials_received) {
+        if (credentials_received || end_config) {
             credentials_received = false;  // Reset the flag
 
             ESP_LOGI(TAG, "Credentials received, saving and initializing Wi-Fi");
 
             // Save credentials
-            save_wifi_credentials(&wifi_credentials);
+            save_credentials(&wifi_credentials, &device_config);
+
+            // You can also save device_config to NVS if needed
 
             // Stop BLE server
             stop_ble_server();
@@ -346,7 +526,6 @@ void credentials_task(void *pvParameter) {
 void check_button_press(void *arg) {
     while (1) {
         if (gpio_get_level(BUTTON_GPIO) == 0) {
-            // Button is pressed
             vTaskDelay(BUTTON_HOLD_TIME / portTICK_PERIOD_MS);
 
             if (gpio_get_level(BUTTON_GPIO) == 0) {
@@ -359,7 +538,6 @@ void check_button_press(void *arg) {
                     isConfigMode = false;
                     stop_ble_server();
                 }
-                // Wait until button is released
                 while (gpio_get_level(BUTTON_GPIO) == 0) {
                     vTaskDelay(100 / portTICK_PERIOD_MS);
                 }
@@ -371,6 +549,7 @@ void check_button_press(void *arg) {
 
 // Start BLE Server
 void start_ble_server(void) {
+    end_config = false;
     // Initialize BLE
     esp_err_t ret = esp_bt_controller_mem_release(ESP_BT_MODE_CLASSIC_BT);
     if (ret) {
@@ -402,17 +581,16 @@ void start_ble_server(void) {
         return;
     }
 
-    // Register GAP and GATT callbacks
     esp_ble_gap_register_callback(gap_event_handler);
     esp_ble_gatts_register_callback(gatts_profile_event_handler);
     esp_ble_gatts_app_register(ESP_APP_ID);
-    
+
     ble_initialized = true;
 }
 
 // Stop BLE Server
 void stop_ble_server(void) {
-    ble_server_stopping = true; // Set flag to indicate BLE server is stopping
+    ble_server_stopping = true;
     esp_err_t ret;
 
     // Stop advertising
@@ -421,7 +599,7 @@ void stop_ble_server(void) {
         ESP_LOGE(TAG, "Failed to stop advertising: %s", esp_err_to_name(ret));
     }
 
-    // Close GATT server connection if connected
+    // Close connection if connected
     if (ble_connected) {
         ret = esp_ble_gatts_close(gl_profile_tab[PROFILE_APP_IDX].gatts_if, gl_profile_tab[PROFILE_APP_IDX].conn_id);
         if (ret != ESP_OK) {
@@ -438,7 +616,7 @@ void stop_ble_server(void) {
         ESP_LOGE(TAG, "Failed to unregister GATT application: %s", esp_err_to_name(ret));
     }
 
-    // Disable and deinitialize Bluedroid
+    // Disable and deinit Bluedroid
     ret = esp_bluedroid_disable();
     if (ret != ESP_OK) {
         ESP_LOGE(TAG, "Failed to disable Bluedroid: %s", esp_err_to_name(ret));
@@ -449,66 +627,164 @@ void stop_ble_server(void) {
         ESP_LOGE(TAG, "Failed to deinit Bluedroid: %s", esp_err_to_name(ret));
     }
 
-    // Do NOT disable or deinitialize the BT controller here, since Wi-Fi needs it.
-    
     ble_initialized = false;
     ESP_LOGI(TAG, "BLE server stopped successfully.");
 }
 
-// Save Wi-Fi Credentials to NVS
-void save_wifi_credentials(const wifi_credentials_t *credentials) {
-    ESP_LOGI(TAG, "Saving Wi-Fi credentials: SSID: %s, Password: %s", credentials->ssid, credentials->password);
+// Save Wi-Fi Credentials and Device Configuration to NVS
+void save_credentials(const wifi_credentials_t *credentials, const device_config_t *config) {
+    ESP_LOGI(TAG, "Saving configuration to NVS...");
 
     nvs_handle_t nvs_handle;
     esp_err_t err = nvs_open("wifi_creds", NVS_READWRITE, &nvs_handle);
-    if (err == ESP_OK) {
-        err = nvs_set_str(nvs_handle, "ssid", credentials->ssid);
-        if (err != ESP_OK) {
-            ESP_LOGE(TAG, "Failed to set SSID in NVS: %s", esp_err_to_name(err));
-        }
-        err = nvs_set_str(nvs_handle, "password", credentials->password);
-        if (err != ESP_OK) {
-            ESP_LOGE(TAG, "Failed to set Password in NVS: %s", esp_err_to_name(err));
-        }
-        err = nvs_commit(nvs_handle);
-        if (err != ESP_OK) {
-            ESP_LOGE(TAG, "Failed to commit NVS changes: %s", esp_err_to_name(err));
-        } else {
-            ESP_LOGI(TAG, "Wi-Fi credentials saved to NVS.");
-        }
-        nvs_close(nvs_handle);
-    } else {
+    if (err != ESP_OK) {
         ESP_LOGE(TAG, "Failed to open NVS handle: %s", esp_err_to_name(err));
+        return;
     }
+
+    // Save SSID
+    err = nvs_set_str(nvs_handle, "ssid", credentials->ssid);
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to set SSID in NVS: %s", esp_err_to_name(err));
+    } else {
+        ESP_LOGI(TAG, "SSID saved: %s", credentials->ssid);
+    }
+
+    // Save Password
+    err = nvs_set_str(nvs_handle, "password", credentials->password);
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to set Password in NVS: %s", esp_err_to_name(err));
+    } else {
+        ESP_LOGI(TAG, "Password saved.");
+    }
+
+    // Save Measuring Frequency
+    err = nvs_set_str(nvs_handle, "meas_freq", config->measuring_frequency);
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to set Measuring Frequency in NVS: %s", esp_err_to_name(err));
+    } else {
+        ESP_LOGI(TAG, "Measuring Frequency saved: %s", config->measuring_frequency);
+    }
+
+    // Save Sending Frequency
+    err = nvs_set_str(nvs_handle, "send_freq", config->sending_frequency);
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to set Sending Frequency in NVS: %s", esp_err_to_name(err));
+    } else {
+        ESP_LOGI(TAG, "Sending Frequency saved: %s", config->sending_frequency);
+    }
+
+    // Save MQTT Broker Address
+    err = nvs_set_str(nvs_handle, "mqtt_broker", config->mqtt_broker);
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to set MQTT Broker Address in NVS: %s", esp_err_to_name(err));
+    } else {
+        ESP_LOGI(TAG, "MQTT Broker Address saved: %s", config->mqtt_broker);
+    }
+
+    // Commit changes to NVS
+    err = nvs_commit(nvs_handle);
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to commit NVS changes: %s", esp_err_to_name(err));
+    } else {
+        ESP_LOGI(TAG, "All configuration parameters saved to NVS successfully.");
+    }
+
+    // Close NVS handle
+    nvs_close(nvs_handle);
 }
 
-// Load Wi-Fi Credentials from NVS
-void load_wifi_credentials(wifi_credentials_t *credentials) {
+// Load Wi-Fi Credentials and Device Configuration from NVS
+void load_credentials(wifi_credentials_t *credentials, device_config_t *config) {
+    ESP_LOGI(TAG, "Loading configuration from NVS...");
+
     nvs_handle_t nvs_handle;
     esp_err_t err = nvs_open("wifi_creds", NVS_READONLY, &nvs_handle);
-    if (err == ESP_OK) {
-        size_t ssid_size = sizeof(credentials->ssid);
-        size_t pass_size = sizeof(credentials->password);
-        err = nvs_get_str(nvs_handle, "ssid", credentials->ssid, &ssid_size);
-        if (err != ESP_OK && err != ESP_ERR_NVS_NOT_FOUND) {
-            ESP_LOGE(TAG, "Failed to get SSID from NVS: %s", esp_err_to_name(err));
-            memset(credentials->ssid, 0, sizeof(credentials->ssid));
-        }
-        err = nvs_get_str(nvs_handle, "password", credentials->password, &pass_size);
-        if (err != ESP_OK && err != ESP_ERR_NVS_NOT_FOUND) {
-            ESP_LOGE(TAG, "Failed to get Password from NVS: %s", esp_err_to_name(err));
-            memset(credentials->password, 0, sizeof(credentials->password));
-        }
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to open NVS handle: %s", esp_err_to_name(err));
+        ESP_LOGW(TAG, "No configuration found. Defaults will be used.");
+        // Optionally, initialize with default values
+        memset(credentials, 0, sizeof(wifi_credentials_t));
+        memset(config, 0, sizeof(device_config_t));
         nvs_close(nvs_handle);
-        ESP_LOGI(TAG, "Wi-Fi credentials loaded from NVS. SSID: %s, Password: %s", credentials->ssid, credentials->password);
-    } else {
-        ESP_LOGE(TAG, "No Wi-Fi credentials found in NVS.");
+        return;
     }
+
+    // Load SSID
+    size_t ssid_size = sizeof(credentials->ssid);
+    err = nvs_get_str(nvs_handle, "ssid", credentials->ssid, &ssid_size);
+    if (err == ESP_OK) {
+        ESP_LOGI(TAG, "SSID loaded: %s", credentials->ssid);
+    } else if (err == ESP_ERR_NVS_NOT_FOUND) {
+        ESP_LOGW(TAG, "SSID not found in NVS.");
+        memset(credentials->ssid, 0, sizeof(credentials->ssid));
+    } else {
+        ESP_LOGE(TAG, "Failed to get SSID from NVS: %s", esp_err_to_name(err));
+        memset(credentials->ssid, 0, sizeof(credentials->ssid));
+    }
+
+    // Load Password
+    size_t pass_size = sizeof(credentials->password);
+    err = nvs_get_str(nvs_handle, "password", credentials->password, &pass_size);
+    if (err == ESP_OK) {
+        ESP_LOGI(TAG, "Password loaded.");
+        // For security reasons, avoid logging the actual password
+    } else if (err == ESP_ERR_NVS_NOT_FOUND) {
+        ESP_LOGW(TAG, "Password not found in NVS.");
+        memset(credentials->password, 0, sizeof(credentials->password));
+    } else {
+        ESP_LOGE(TAG, "Failed to get Password from NVS: %s", esp_err_to_name(err));
+        memset(credentials->password, 0, sizeof(credentials->password));
+    }
+
+    // Load Measuring Frequency
+    size_t meas_freq_size = sizeof(config->measuring_frequency);
+    err = nvs_get_str(nvs_handle, "meas_freq", config->measuring_frequency, &meas_freq_size);
+    if (err == ESP_OK) {
+        ESP_LOGI(TAG, "Measuring Frequency loaded: %s", config->measuring_frequency);
+    } else if (err == ESP_ERR_NVS_NOT_FOUND) {
+        ESP_LOGW(TAG, "Measuring Frequency not found in NVS.");
+        memset(config->measuring_frequency, 0, sizeof(config->measuring_frequency));
+    } else {
+        ESP_LOGE(TAG, "Failed to get Measuring Frequency from NVS: %s", esp_err_to_name(err));
+        memset(config->measuring_frequency, 0, sizeof(config->measuring_frequency));
+    }
+
+    // Load Sending Frequency
+    size_t send_freq_size = sizeof(config->sending_frequency);
+    err = nvs_get_str(nvs_handle, "send_freq", config->sending_frequency, &send_freq_size);
+    if (err == ESP_OK) {
+        ESP_LOGI(TAG, "Sending Frequency loaded: %s", config->sending_frequency);
+    } else if (err == ESP_ERR_NVS_NOT_FOUND) {
+        ESP_LOGW(TAG, "Sending Frequency not found in NVS.");
+        memset(config->sending_frequency, 0, sizeof(config->sending_frequency));
+    } else {
+        ESP_LOGE(TAG, "Failed to get Sending Frequency from NVS: %s", esp_err_to_name(err));
+        memset(config->sending_frequency, 0, sizeof(config->sending_frequency));
+    }
+
+    // Load MQTT Broker Address
+    size_t mqtt_broker_size = sizeof(config->mqtt_broker);
+    err = nvs_get_str(nvs_handle, "mqtt_broker", config->mqtt_broker, &mqtt_broker_size);
+    if (err == ESP_OK) {
+        ESP_LOGI(TAG, "MQTT Broker Address loaded: %s", config->mqtt_broker);
+    } else if (err == ESP_ERR_NVS_NOT_FOUND) {
+        ESP_LOGW(TAG, "MQTT Broker Address not found in NVS.");
+        memset(config->mqtt_broker, 0, sizeof(config->mqtt_broker));
+    } else {
+        ESP_LOGE(TAG, "Failed to get MQTT Broker Address from NVS: %s", esp_err_to_name(err));
+        memset(config->mqtt_broker, 0, sizeof(config->mqtt_broker));
+    }
+
+    // Close NVS handle
+    nvs_close(nvs_handle);
+
+    ESP_LOGI(TAG, "Configuration loaded from NVS successfully.");
 }
 
-// Initialize Wi-Fi Driver and Connect
+
+// Initialize Wi-Fi
 void wifi_init(void) {
-    // Initialize Wi-Fi driver with default configuration
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
     esp_err_t ret = esp_wifi_init(&cfg);
     if (ret != ESP_OK) {
@@ -516,7 +792,6 @@ void wifi_init(void) {
         return;
     }
 
-    // Register Wi-Fi and IP event handlers
     ESP_ERROR_CHECK(esp_event_handler_instance_register(WIFI_EVENT,
                                                         ESP_EVENT_ANY_ID,
                                                         &wifi_event_handler,
@@ -534,7 +809,6 @@ void wifi_init(void) {
         return;
     }
 
-    // Configure Wi-Fi with SSID and password
     wifi_config_t wifi_config = {
         .sta = {
             .ssid = "",
@@ -546,7 +820,7 @@ void wifi_init(void) {
             },
         },
     };
-    // Copy SSID and password from loaded credentials
+
     strncpy((char*)wifi_config.sta.ssid, wifi_credentials.ssid, sizeof(wifi_config.sta.ssid));
     strncpy((char*)wifi_config.sta.password, wifi_credentials.password, sizeof(wifi_config.sta.password));
 
@@ -586,15 +860,15 @@ static void wifi_event_handler(void* arg, esp_event_base_t event_base, int32_t e
 // Wi-Fi Status Logger Task
 void wifi_status_logger_task(void *pvParameter) {
     while (1) {
-        if (isConnected) {
-            ESP_LOGI(TAG, "Wi-Fi Status: CONNECTED");
-        } else {
-            ESP_LOGI(TAG, "Wi-Fi Status: DISCONNECTED");
-        }
-        vTaskDelay(3000 / portTICK_PERIOD_MS);  // Wait for 3 seconds
+        ESP_LOGI(TAG, "Current Configuration Parameters:");
+        ESP_LOGI(TAG, "SSID: %s", wifi_credentials.ssid);
+        ESP_LOGI(TAG, "Password: %s", wifi_credentials.password);
+        ESP_LOGI(TAG, "Measuring Frequency: %s", device_config.measuring_frequency);
+        ESP_LOGI(TAG, "Sending Frequency: %s", device_config.sending_frequency);
+        ESP_LOGI(TAG, "MQTT Broker Address: %s", device_config.mqtt_broker);
+        vTaskDelay(10000 / portTICK_PERIOD_MS);  // Wait for 10 seconds
     }
 }
-
 // LED Blinking Task
 void blink_led_task(void *pvParameter) {
     esp_rom_gpio_pad_select_gpio(BLINK_GPIO);
@@ -678,7 +952,6 @@ void fetch_webpage_task(void *pvParameter) {
 void app_main(void) {
     // Initialize NVS
     esp_err_t ret = nvs_flash_init();
-    // Handle NVS errors
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
         ESP_LOGI(TAG, "Erasing NVS Flash...");
         ESP_ERROR_CHECK(nvs_flash_erase());
@@ -686,17 +959,12 @@ void app_main(void) {
     }
     ESP_ERROR_CHECK(ret);
 
-    // Initialize network interface and event loop
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(esp_event_loop_create_default());
-
-    // Create default Wi-Fi station
     esp_netif_create_default_wifi_sta();
 
-    // Load Wi-Fi credentials from NVS
-    load_wifi_credentials(&wifi_credentials);
+    load_credentials(&wifi_credentials, &device_config);
 
-    // Initialize button GPIO
     gpio_config_t io_conf = {
         .intr_type = GPIO_INTR_DISABLE,
         .mode = GPIO_MODE_INPUT,
@@ -706,7 +974,6 @@ void app_main(void) {
     };
     gpio_config(&io_conf);
 
-    // Initialize Wi-Fi
     if (strlen(wifi_credentials.ssid) > 0) {
         ESP_LOGI(TAG, "Wi-Fi credentials found. Initializing Wi-Fi...");
         wifi_init();
@@ -716,7 +983,6 @@ void app_main(void) {
         start_ble_server();
     }
 
-    // Start FreeRTOS tasks
     xTaskCreate(&check_button_press, "check_button_press", 2048, NULL, 5, NULL);
     xTaskCreate(&blink_led_task, "blink_led_task", 1024, NULL, 5, NULL);
     xTaskCreate(&credentials_task, "credentials_task", 4096, NULL, 5, NULL);
