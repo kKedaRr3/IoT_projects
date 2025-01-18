@@ -1,5 +1,7 @@
 package org.example;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,43 +68,45 @@ public class VisualizeDataController {
         dataVisualizationThread.setDaemon(true);
         dataVisualizationThread.start();
     }
+    
 
-    private void updateChart(String data) {
+    public void updateChart(String data) {
         try {
-            // Rozdzielenie danych na komponenty
-            String[] components = data.split(",");
-            if (components.length == 4) {
-                double x = Double.parseDouble(components[0]);
-                double y = Double.parseDouble(components[1]);
-                double z = Double.parseDouble(components[2]);
-                long timestamp = Long.parseLong(components[3]);
+            // Parsowanie danych JSON
+            JsonObject jsonData = JsonParser.parseString(data).getAsJsonObject();
 
-                // Obliczenie przyspieszenia
-                double acceleration = Math.sqrt(x * x + y * y + z * z);
-                XYChart.Data<Number, Number> dataPoint = new XYChart.Data<>(timestamp, acceleration);
+            // Pobieranie komponentów x, y, z oraz timestamp z JSON
+            double x = jsonData.get("x").getAsDouble();
+            double y = jsonData.get("y").getAsDouble();
+            double z = jsonData.get("z").getAsDouble();
+            long timestamp = jsonData.get("timestamp").getAsLong();
 
-                // Dodaj punkt do serii
-                accelerometerSeries.getData().add(dataPoint);
+            // Obliczenie przyspieszenia
+            double acceleration = Math.sqrt(x * x + y * y + z * z);
 
-                // Dodajemy dane wykresu do DataStorage
-                DataStorage.addChartData(dataPoint);
+            // Dodanie punktu do wykresu
+            XYChart.Data<Number, Number> dataPoint = new XYChart.Data<>(timestamp, acceleration);
+            accelerometerSeries.getData().add(dataPoint);
 
-                // Usuwanie najstarszych danych, jeśli liczba punktów przekracza limit
-                if (accelerometerSeries.getData().size() > MAX_VISIBLE_POINTS) {
-                    accelerometerSeries.getData().remove(0);
-                }
+            // Dodanie danych wykresu do DataStorage
+            DataStorage.addChartData(dataPoint);
 
-                // Zaktualizuj zakres osi X
-                adjustXAxis();
-
-                // Wymuszenie płynnej aktualizacji wykresu tylko raz na cykl
-                Platform.runLater(accelerationChart::layout);
+            // Usuwanie najstarszych danych, jeśli liczba punktów przekracza limit
+            if (accelerometerSeries.getData().size() > MAX_VISIBLE_POINTS) {
+                accelerometerSeries.getData().remove(0);
             }
+
+            // Zaktualizowanie zakresu osi X
+            adjustXAxis();
+
+            // Wymuszenie płynnej aktualizacji wykresu tylko raz na cykl
+            Platform.runLater(accelerationChart::layout);
         } catch (Exception e) {
             System.err.println("Błąd przetwarzania danych: " + data);
             e.printStackTrace();
         }
     }
+
 
     private void adjustXAxis() {
         // Ustaw zakres osi X na podstawie widocznych danych
