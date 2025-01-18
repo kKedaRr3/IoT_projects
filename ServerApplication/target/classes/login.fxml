@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.geometry.Pos?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.LoginController" hgap="10" vgap="10" alignment="center">
+    <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+    <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+    <Button text="Login" onAction="#handleLogin" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <Button text="Register" onAction="#goToRegister" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+    <Label fx:id="errorLabel" textFill="red" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+</GridPane>

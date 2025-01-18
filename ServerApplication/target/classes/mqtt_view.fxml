@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.MqttController">
+    <!-- Label for MQTT Broker Address -->
+    <Label text="MQTT Broker Address:" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20"/>
+    <TextField fx:id="brokerAddressField" promptText="e.g., tcp://broker.hivemq.com:1883" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="200" AnchorPane.rightAnchor="20"/>
+
+    <!-- Label for Connection Status -->
+    <Label text="Connection Status:" AnchorPane.topAnchor="60" AnchorPane.leftAnchor="20"/>
+    <Label fx:id="connectionStatusLabel" text="Disconnected" style="-fx-text-fill: red;" AnchorPane.topAnchor="60" AnchorPane.leftAnchor="200"/>
+
+    <!-- Label for ESP MAC Address Error -->
+    <Label fx:id="espMacErrorLabel" text="" style="-fx-text-fill: red; -fx-font-size: 16px;" AnchorPane.topAnchor="100" AnchorPane.leftAnchor="20"/>
+
+    <!-- Connect and Disconnect buttons -->
+    <Button text="Connect" onAction="#handleConnect" AnchorPane.topAnchor="140" AnchorPane.leftAnchor="20"/>
+    <Button text="Disconnect" onAction="#handleDisconnect" AnchorPane.topAnchor="140" AnchorPane.leftAnchor="100"/>
+
+    <!-- Send Config button -->
+    <Button text="Send ESP32 Config" onAction="#handleSendConfig" AnchorPane.topAnchor="200" AnchorPane.leftAnchor="20"/>
+
+
+    <!-- HBox for message areas -->
+    <HBox spacing="10" AnchorPane.topAnchor="270" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="80">
+        <VBox spacing="5" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="100">
+            <Label text="acc"/>
+            <TextArea fx:id="accMessagesArea" editable="false" VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </HBox>
+
+    <!-- Back to Dashboard button -->
+    <Button text="Back to Dashboard" onAction="#handleBackToDashboard" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20"/>
+</AnchorPane>

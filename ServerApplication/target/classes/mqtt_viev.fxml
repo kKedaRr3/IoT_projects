@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.MqttController">
+    <Label text="MQTT Broker Address:" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20"/>
+    <TextField fx:id="brokerAddressField" promptText="e.g., tcp://broker.hivemq.com:1883" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="200" AnchorPane.rightAnchor="20"/>
+
+    <Label text="Connection Status:" AnchorPane.topAnchor="60" AnchorPane.leftAnchor="20"/>
+    <Label fx:id="connectionStatusLabel" text="Disconnected" style="-fx-text-fill: red;" AnchorPane.topAnchor="60" AnchorPane.leftAnchor="200"/>
+
+    <Button text="Connect" onAction="#handleConnect" AnchorPane.topAnchor="100" AnchorPane.leftAnchor="20"/>
+    <Button text="Disconnect" onAction="#handleDisconnect" AnchorPane.topAnchor="100" AnchorPane.leftAnchor="100"/>
+
+    <Label text="Subscribed Topics:" AnchorPane.topAnchor="140" AnchorPane.leftAnchor="20"/>
+    <Label text="acc" AnchorPane.topAnchor="160" AnchorPane.leftAnchor="20"/>
+    <TextArea fx:id="accMessagesArea" editable="false" AnchorPane.topAnchor="180" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="220"/>
+
+    <Label text="mag" AnchorPane.topAnchor="160" AnchorPane.leftAnchor="300"/>
+    <TextArea fx:id="magMessagesArea" editable="false" AnchorPane.topAnchor="180" AnchorPane.leftAnchor="300" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="220"/>
+
+    <Button text="Back to Dashboard" onAction="#handleBackToDashboard" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20"/>
+
+</AnchorPane>
+
